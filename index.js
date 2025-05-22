@@ -45,17 +45,18 @@ async function run() {
       res.send(result);
     });
 
-    // app.get("/plants/email/:userEmail", async (req, res) => {
-    //   const email = req.params.userEmail;
-    //   const query = { userEmail: email };
-    //   const result = await plantCollection.find(query).toArray();
-    //   res.send(result);
-    // });
-
     // POST
     app.post("/plants", async (req, res) => {
       const addPlantData = req.body;
       const result = await plantCollection.insertOne(addPlantData);
+      res.send(result);
+    });
+
+    // DELETE
+    app.delete("/plants/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await plantCollection.deleteOne(query);
       res.send(result);
     });
 
