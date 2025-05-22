@@ -32,9 +32,22 @@ async function run() {
     // -----------------------
 
     // GET
+    // app.get("/plants", async (req, res) => {
+    //   const result = await plantCollection.find().toArray();
+    //   res.send(result);
+    // });
+
     app.get("/plants", async (req, res) => {
-      const result = await plantCollection.find().toArray();
-      res.send(result);
+      try {
+        const result = await plantCollection
+          .find()
+          .sort({ nextWatering: 1, _id: 1 })
+          .toArray();
+        res.send(result);
+      } catch (error) {
+        console.error("Error fetching plants:", error);
+        res.status(500).send({ message: "Internal server error" });
+      }
     });
 
     // Specific GET
