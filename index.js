@@ -45,12 +45,12 @@ async function run() {
       res.send(result);
     });
 
-    app.get("/plants/email/:userEmail", async (req, res) => {
-      const email = req.params.userEmail;
-      const query = { userEmail: email };
-      const result = await plantCollection.find(query).toArray();
-      res.send(result);
-    });
+    // app.get("/plants/email/:userEmail", async (req, res) => {
+    //   const email = req.params.userEmail;
+    //   const query = { userEmail: email };
+    //   const result = await plantCollection.find(query).toArray();
+    //   res.send(result);
+    // });
 
     // POST
     app.post("/plants", async (req, res) => {
