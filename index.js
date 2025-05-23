@@ -32,12 +32,13 @@ async function run() {
     // -----------------------
 
     // GET
-    // app.get("/plants", async (req, res) => {
-    //   const result = await plantCollection.find().toArray();
-    //   res.send(result);
-    // });
-
     app.get("/plants", async (req, res) => {
+      const result = await plantCollection.find().toArray();
+      res.send(result);
+    });
+
+    // Sorted Get based on (newtWatering)
+    app.get("/sortedPlants", async (req, res) => {
       try {
         const result = await plantCollection
           .find()
