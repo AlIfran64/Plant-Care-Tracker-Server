@@ -40,10 +40,16 @@ async function run() {
     // Sorted Get based on (newtWatering)
     app.get("/sortedPlants", async (req, res) => {
       try {
+        const { sortOrder = "asc", category } = req.query;
+
+        const sortDirection = sortOrder === "desc" ? -1 : 1;
+        const filter = category ? { category } : {};
+
         const result = await plantCollection
-          .find()
-          .sort({ nextWatering: 1, _id: 1 })
+          .find(filter)
+          .sort({ nextWatering: sortDirection })
           .toArray();
+
         res.send(result);
       } catch (error) {
         console.error("Error fetching plants:", error);
